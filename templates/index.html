@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GoonerBrain - Ultra Fast NSFW Meta Search</title>
+  <meta name="description" content="Lightning-fast search across 26+ premium adult sites. Instant results, infinite scroll, smart categories." />
+  <meta property="og:title" content="GoonerBrain - Ultra Fast NSFW Meta Search">
+  <meta property="og:description" content="Lightning-fast search across 26+ premium adult sites. Instant results, infinite scroll, smart categories.">
+  <meta property="og:image" content="https://goonerbrain.com/og-image.jpg">
+  <meta property="og:url" content="https://goonerbrain.com">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="GoonerBrain - Ultra Fast NSFW Meta Search">
+  <meta name="twitter:description" content="Lightning-fast search across 26+ premium adult sites">
+  <meta name="twitter:image" content="https://goonerbrain.com/og-image.jpg">
+  
+  <!-- Enhanced Favicon Setup -->
+  <link rel="icon" href="/public/goonerbrain.png" type="image/png" />
+  <link rel="shortcut icon" href="/public/goonerbrain.png" type="image/png" />
+  <link rel="apple-touch-icon" href="/public/goonerbrain.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/goonerbrain.png" />
+  <meta name="msapplication-TileImage" content="/public/goonerbrain.png" />
+  
+  <!-- Google Fonts for enhanced typography -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary: #fd91d6;
+      --secondary: #7ca1ff;
+      --tertiary: #c499ff;
+      --dark: #0a0a0b;
+      --darker: #050506;
+      --gray: #1a1a1d;
+      --light-gray: #2a2a2e;
+      --text: #ffffff;
+      --text-muted: #b8b8b8;
+      --success: #00d4aa;
+      --warning: #ff9500;
+      --error: #ff3b30;
+      --shadow: rgba(253, 145, 214, 0.15);
+      --shadow-dark: rgba(0, 0, 0, 0.4);
+      --blur: blur(20px);
+      --border-radius: 16px;
+      --border-radius-sm: 8px;
+      --transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+      --transition-fast: all 0.15s cubic-bezier(0.4, 0.0, 0.2, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 50%, #0d0d0f 100%);
+      background-attachment: fixed;
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    /* Global backdrop filter */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 20% 50%, rgba(253, 145, 214, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(124, 161, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 80%, rgba(196, 153, 255, 0.1) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    /* Modern container */
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      padding: 60px 0 40px 0;
+      position: relative;
+    }
+
+    .logo {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 60%, var(--tertiary) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: 900;
+      font-size: clamp(2rem, 8vw, 4rem);
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+      text-shadow: 0 0 40px rgba(253, 145, 214, 0.3);
+      animation: glow 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { filter: drop-shadow(0 0 20px rgba(253, 145, 214, 0.5)); }
+      to { filter: drop-shadow(0 0 40px rgba(124, 161, 255, 0.5)); }
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 1.125rem;
+      font-weight: 400;
+      margin-bottom: 32px;
+      opacity: 0.8;
+    }
+
+    /* Navigation */
+    .nav {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+
+    .nav-btn {
+      position: relative;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: var(--blur);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text);
+      padding: 14px 28px;
+      border-radius: var(--border-radius);
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: var(--transition);
+      overflow: hidden;
+    }
+
+    .nav-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      transition: left 0.5s;
+    }
+
+    .nav-btn:hover::before {
+      left: 100%;
+    }
+
+    .nav-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px var(--shadow);
+      border-color: rgba(253, 145, 214, 0.3);
+    }
+
+    .nav-btn.active {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border-color: var(--primary);
+      color: white;
+      box-shadow: 0 8px 32px var(--shadow);
+    }
+
+    /* Search Section */
+    .search-section {
+      margin-bottom: 48px;
+    }
+
+    .search-container {
+      position: relative;
+      max-width: 600px;
+      margin: 0 auto 32px auto;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 20px 24px;
+      font-size: 1.125rem;
+      font-weight: 500;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: var(--blur);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--border-radius);
+      color: var(--text);
+      transition: var(--transition);
+      outline: none;
+    }
+
+    .search-input::placeholder {
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    .search-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(253, 145, 214, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .search-actions {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .btn {
+      position: relative;
+      padding: 14px 28px;
+      border: none;
+      border-radius: var(--border-radius);
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: var(--transition);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      overflow: hidden;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      box-shadow: 0 4px 16px rgba(253, 145, 214, 0.3);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: var(--blur);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: var(--text);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px var(--shadow);
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 8px 32px rgba(253, 145, 214, 0.4);
+    }
+
+    /* Recommendations */
+    .recommendations {
+      margin-bottom: 48px;
+    }
+
+    .section-title {
+      color: var(--primary);
+      font-size: 1.25rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 24px;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      border-radius: 2px;
+    }
+
+    .tags-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .tag-btn {
+      position: relative;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: var(--blur);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text);
+      padding: 10px 18px;
+      border-radius: 24px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+      outline: none;
+    }
+
+    .tag-btn:hover {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(253, 145, 214, 0.3);
+    }
+
+    .trending-btn {
+      background: linear-gradient(135deg, #ff9500, #ff6b35) !important;
+      border-color: #ff9500 !important;
+      color: white !important;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    /* Loading Animation */
+    .loading {
+      display: none;
+      text-align: center;
+      margin: 48px 0;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .loading.active {
+      display: block;
+      opacity: 1;
+    }
+
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 3px solid rgba(255, 255, 255, 0.1);
+      border-top: 3px solid var(--primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 20px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .loading-text {
+      color: var(--primary);
+      font-size: 1.125rem;
+      font-weight: 600;
+    }
+
+    /* Results Grid */
+    .results-container {
+      margin-top: 48px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
+      padding: 0;
+    }
+
+    .card {
+      position: relative;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: var(--blur);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 20px 40px var(--shadow-dark);
+      border-color: rgba(253, 145, 214, 0.3);
+    }
+
+    .card-image {
+      position: relative;
+      width: 100%;
+      height: 200px;
+      overflow: hidden;
+    }
+
+    .card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .card:hover .card-image img {
+      transform: scale(1.1);
+    }
+
+    .card-image::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.7) 100%);
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .card:hover .card-image::after {
+      opacity: 1;
+    }
+
+    .card-content {
+      padding: 20px;
+    }
+
+    .card-title {
+      color: var(--text);
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      line-height: 1.4;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+
+    .card-source {
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Categories */
+    .categories-container {
+      display: none;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .categories-container.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 24px;
+    }
+
+    .category-card {
+      position: relative;
+      height: 180px;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: var(--blur);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .category-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px var(--shadow-dark);
+      border-color: rgba(253, 145, 214, 0.3);
+    }
+
+    .category-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 24px;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+      color: white;
+    }
+
+    .category-title {
+      font-size: 1.125rem;
+      font-weight: 700;
+      text-transform: capitalize;
+      margin-bottom: 8px;
+    }
+
+    .category-count {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* Scroll Animation */
+    .scroll-indicator {
+      text-align: center;
+      margin: 64px 0 32px 0;
+      animation: colorCycle 4s ease-in-out infinite;
+    }
+
+    @keyframes colorCycle {
+      0%, 100% { color: var(--primary); transform: translateY(0); }
+      25% { color: var(--secondary); transform: translateY(-5px); }
+      50% { color: var(--tertiary); transform: translateY(0); }
+      75% { color: var(--warning); transform: translateY(-5px); }
+    }
+
+    .scroll-indicator h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .scroll-arrow {
+      font-size: 2rem;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-10px); }
+      60% { transform: translateY(-5px); }
+    }
+
+    /* Infinite Scroll Indicator */
+    .infinite-scroll-indicator {
+      text-align: center;
+      margin: 48px 0;
+      display: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .infinite-scroll-indicator.loading {
+      display: block;
+      opacity: 1;
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 80px;
+      padding: 48px 0;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 1.8;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .footer a {
+      color: var(--primary);
+      text-decoration: none;
+      transition: var(--transition-fast);
+    }
+
+    .footer a:hover {
+      color: var(--secondary);
+      text-decoration: underline;
+    }
+
+    .support-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 24px 0;
+      padding: 12px 24px;
+      background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+      color: white;
+      text-decoration: none;
+      border-radius: var(--border-radius);
+      font-weight: 600;
+      transition: var(--transition);
+    }
+
+    .support-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(255, 107, 107, 0.3);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 16px;
+      }
+
+      .header {
+        padding: 40px 0 32px 0;
+      }
+
+      .logo {
+        font-size: 2.5rem;
+      }
+
+      .nav {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .nav-btn {
+        width: 200px;
+      }
+
+      .search-actions {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .btn {
+        width: 200px;
+        justify-content: center;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .categories-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .tags-container {
+        gap: 8px;
+      }
+
+      .tag-btn {
+        font-size: 0.85rem;
+        padding: 8px 14px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .search-input {
+        font-size: 1rem;
+        padding: 16px 20px;
+      }
+
+      .card-content {
+        padding: 16px;
+      }
+
+      .footer {
+        padding: 32px 0;
+        font-size: 0.85rem;
+      }
+    }
+
+    /* Error States */
+    .error {
+      color: var(--error);
+      font-size: 1rem;
+      font-weight: 500;
+      text-align: center;
+      margin: 48px 0;
+      padding: 24px;
+      background: rgba(255, 59, 48, 0.1);
+      border: 1px solid rgba(255, 59, 48, 0.2);
+      border-radius: var(--border-radius);
+    }
+
+    /* Success States */
+    .success {
+      color: var(--success);
+      background: rgba(0, 212, 170, 0.1);
+      border-color: rgba(0, 212, 170, 0.2);
+    }
+
+    /* Dark scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--dark);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--light-gray);
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--primary);
+    }
+
+    /* Selection */
+    ::selection {
+      background: rgba(253, 145, 214, 0.3);
+      color: white;
+    }
+  </style>
+
+  <!-- PopAds (commented out to fix console errors) -->
+  <!--
+  <script>
+    var popunder = {
+      "id": "YOUR_ID_HERE",
+      "frequency_period": 5,
+      "frequency_count": 1
+    };
+  </script>
+  <script src="https://cdn.popads.net/pop.js"></script>
+  -->
+</head>
+<body>
+  <h1>GoonerBrain Meta Search</h1>
+
+  <!-- Navigation -->
+  <div class="nav-buttons">
+    <button class="nav-btn active" onclick="showSearch()">🔍 Search</button>
+    <button class="nav-btn" onclick="showCategories()">📂 Categories</button>
+  </div>
+
+  <!-- Search Section -->
+  <div id="search-section">
+    <form onsubmit="event.preventDefault(); doSearch();">
+      <input id="search" type="text" placeholder="Search anything..." autocomplete="off" />
+      <button type="button" onclick="randomSearch()" style="margin-left: 10px; padding: 10px 20px; background: linear-gradient(90deg,#fd91d6 0,#7ca1ff 60%,#c499ff 100%); border: none; border-radius: 5px; color: white; font-weight: bold; cursor: pointer;">🎲 Random</button>
+    </form>
+
+    <!-- Common search buttons -->
+    <div class="search-sections">
+      <div class="search-section">
+        <h3 style="color: #fd91d6; font-size: 1em; margin: 15px 0 8px 0; font-weight: 600;">💡 Recommendations</h3>
+        <div id="recommendations" class="trending-bar">
+          <!-- Recommendation buttons will be loaded here -->
+        </div>
+      </div>
+      
+    </div>
+
+    <!-- Loading Animation -->
+    <div id="loading" class="loading">
+      <div class="spinner"></div>
+      <div class="loading-text">Searching across multiple sites...</div>
+    </div>
+
+    <div id="results"></div>
+
+    <!-- Infinite Scroll Indicator -->
+    <div id="infinite-scroll-indicator" class="infinite-scroll-indicator">
+      Loading more results...
+    </div>
+  </div>
+
+  <!-- Categories Section -->
+  <div id="categories-section" class="categories-container">
+    <div id="categories-grid" class="categories-grid">
+      <!-- Categories will be loaded here -->
+    </div>
+  </div>
+
+  <!-- Trending Section -->
+  <div id="trending" class="trending-section">
+    <h2>Trending Now</h2>
+    <div class="trending-bar">
+      <!-- Trending searches will be dynamically populated here -->
+    </div>
+  </div>
+
+  <!-- Scroll More Section -->
+  <div id="scroll-more" class="scroll-section">
+    <h2>Scroll for More</h2>
+  </div>
+
+  <!-- Share Section -->
+  <div id="share-buttons" class="share-section">
+    <h2>Share GoonerBrain</h2>
+    <button onclick="window.open('https://twitter.com/share?url=https://goonerbrain.com', '_blank')">Share on Twitter</button>
+    <button onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=https://goonerbrain.com', '_blank')">Share on Facebook</button>
+    <button onclick="navigator.clipboard.writeText('https://goonerbrain.com'); alert('Link copied to clipboard!');">Copy Link</button>
+  </div>
+
+  <p style="margin-top: 22px;">
+    <a href="https://ko-fi.com/goonerbrain" target="_blank" style="color:hotpink;">💖 Support This Project</a>
+  </p>
+
+  <div class="footer">
+    <b>Disclaimer:</b> GoonerBrain does not host any content—search results link to third-party sites.<br>
+    18+ only. For removal requests, DMCA, or legal contact: goonerbr@webhosting3008.is.cc.<br>
+    <a href="/tos" style="color:#fd91d6;">Terms of Service / Privacy / DMCA</a>
+  </div>
+
+  <script>
+    // Global variables
+    let cachedCommonSearches = [];
+    let currentResults = [];
+    let currentQuery = '';
+    let currentSkip = 0;
+    let isLoading = false;
+    let hasMoreResults = false;
+
+    // Navigation functions
+    function showSearch() {
+      document.getElementById('search-section').style.display = 'block';
+      document.getElementById('categories-section').classList.remove('active');
+      document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+    }
+
+    function showCategories() {
+      document.getElementById('search-section').style.display = 'none';
+      document.getElementById('categories-section').classList.add('active');
+      document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      loadCategories();
+    }
+
+    // Categories functionality
+    function loadCategories() {
+      const categories = [
+        { name: 'mature', emoji: '👩‍🦳', gradient: 'linear-gradient(45deg, #ff6b6b, #ee5a24)' },
+        { name: 'milf', emoji: '👩', gradient: 'linear-gradient(45deg, #fd79a8, #e84393)' },
+        { name: 'teen', emoji: '🔞', gradient: 'linear-gradient(45deg, #74b9ff, #0984e3)' },
+        { name: 'asian', emoji: '🎎', gradient: 'linear-gradient(45deg, #ffeaa7, #fdcb6e)' },
+        { name: 'latina', emoji: '💃', gradient: 'linear-gradient(45deg, #fd79a8, #e84393)' },
+        { name: 'black', emoji: '👩🏿', gradient: 'linear-gradient(45deg, #636e72, #2d3436)' },
+        { name: 'bbw', emoji: '🍑', gradient: 'linear-gradient(45deg, #fd79a8, #e84393)' },
+        { name: 'anal', emoji: '🍑', gradient: 'linear-gradient(45deg, #a29bfe, #6c5ce7)' },
+        { name: 'lesbian', emoji: '👩‍❤️‍👩', gradient: 'linear-gradient(45deg, #ff7675, #e17055)' },
+        { name: 'hardcore', emoji: '🔥', gradient: 'linear-gradient(45deg, #ff6348, #e55039)' },
+        { name: 'amateur', emoji: '📹', gradient: 'linear-gradient(45deg, #00b894, #00a085)' },
+        { name: 'big tits', emoji: '🍒', gradient: 'linear-gradient(45deg, #fd79a8, #e84393)' },
+        { name: 'threesome', emoji: '3️⃣', gradient: 'linear-gradient(45deg, #a29bfe, #6c5ce7)' },
+        { name: 'blowjob', emoji: '👄', gradient: 'linear-gradient(45deg, #fd79a8, #e84393)' },
+        { name: 'creampie', emoji: '💦', gradient: 'linear-gradient(45deg, #74b9ff, #0984e3)' },
+        { name: 'hentai', emoji: '🦑', gradient: 'linear-gradient(45deg, #fd79a8, #6c5ce7)' }
+      ];
+
+      const grid = document.getElementById('categories-grid');
+      grid.innerHTML = categories.map(cat => `
+        <div class="category-card" onclick="searchCategory('${cat.name}')">
+          <div class="category-thumbnail" style="background: ${cat.gradient};">
+            <span style="z-index: 3; position: relative;">${cat.emoji}</span>
+          </div>
+          <div class="category-title">${cat.name}</div>
+        </div>
+      `).join('');
+    }
+
+    function searchCategory(category) {
+      showSearch();
+      document.getElementById("search").value = category;
+      doSearch();
+    }
+
+    // Enhanced search functionality with infinite scroll
+    async function doSearch(loadMoreOrTerm = false) {
+      let q;
+      let loadMore = false;
+      
+      // Handle both cases: doSearch(true) for loadMore and doSearch("term") for direct search
+      if (typeof loadMoreOrTerm === 'string') {
+        q = loadMoreOrTerm;
+        document.getElementById("search").value = q;
+      } else {
+        loadMore = loadMoreOrTerm;
+        q = document.getElementById("search").value.trim();
+      }
+      
+      if (!q) return;
+
+      if (!loadMore) {
+        currentQuery = q;
+        currentSkip = 0;
+        currentResults = [];
+        hasMoreResults = false;
+        document.getElementById("results").innerHTML = '';
+        document.getElementById("infinite-scroll-indicator").style.display = 'none';
+      }
+
+      if (isLoading) return;
+      isLoading = true;
+
+      // Show loading animation or infinite scroll indicator
+      if (loadMore) {
+        document.getElementById("infinite-scroll-indicator").classList.add('loading');
+      } else {
+        const loading = document.getElementById("loading");
+        loading.classList.add('active');
+      }
+
+      try {
+        const base = "http://localhost:8000";
+        
+        const url = `${base}/search?q=${encodeURIComponent(q)}&skip=${currentSkip}`;
+        const res = await fetch(url);
+        const data = await res.json();
+
+        if (data.results && data.results.length > 0) {
+          const newResults = data.results.slice(0, 50); // Load 50 per page for better performance
+          currentResults = [...currentResults, ...newResults];
+          currentSkip = currentResults.length;
+
+          renderResults(loadMore);
+
+          // Check if there are more results available
+          hasMoreResults = data.results.length >= 50;
+        } else if (!loadMore) {
+          document.getElementById("results").innerHTML = '<p class="error">No results found. Try a different search term.</p>';
+          hasMoreResults = false;
+        } else {
+          hasMoreResults = false;
+        }
+      } catch (error) {
+        console.error('Search error:', error);
+        if (!loadMore) {
+          document.getElementById("results").innerHTML = '<p class="error">Search failed. Please try again.</p>';
+        }
+        hasMoreResults = false;
+      } finally {
+        if (loadMore) {
+          document.getElementById("infinite-scroll-indicator").classList.remove('loading');
+        } else {
+          const loading = document.getElementById("loading");
+          loading.classList.remove('active');
+        }
+        isLoading = false;
+      }
+    }
+
+    // Infinite scroll detection
+    function handleInfiniteScroll() {
+      if (isLoading || !hasMoreResults || !currentQuery) return;
+
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+
+      // Load more when user is within 200px of the bottom
+      if (scrollTop + windowHeight >= documentHeight - 200) {
+        doSearch(true);
+      }
+    }
+
+    function renderResults(append = false) {
+      const resultsContainer = document.getElementById("results");
+      
+      if (!append) {
+        resultsContainer.innerHTML = '';
+      }
+
+      const startIndex = append ? resultsContainer.children.length : 0;
+      const newResultsToShow = currentResults.slice(startIndex);
+
+      newResultsToShow.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        
+        // Enhanced card with clickable thumbnail instead of watch now button
+        card.innerHTML = `
+          <a href="${item.url}" target="_blank" rel="noopener" style="display: block; text-decoration: none;">
+            ${item.preview 
+              ? `<img src="${item.preview}" alt="${item.title}" loading="lazy" onerror="this.style.display='none'" style="width: 100%; height: 178px; object-fit: cover; border-radius: 7px; cursor: pointer;">`
+              : `<div style="width: 100%; height: 178px; background: linear-gradient(45deg, #333, #555); display: flex; align-items: center; justify-content: center; border-radius: 7px; cursor: pointer;"><span style="color: #888; font-size: 2em;">🎬</span></div>`
+            }
+          </a>
+          <h3>${item.title}</h3>
+          <p class="source">Source: ${item.source}</p>
+        `;
+        
+        resultsContainer.appendChild(card);
+      });
+
+      // Update grid display
+      if (currentResults.length > 0) {
+        resultsContainer.className = 'grid';
+      }
+    }
+
+    // Load common and trending searches on page load
+    async function loadSearchButtons() {
+      try {
+        const base = "http://localhost:8000";
+        
+        // Load common searches
+        const commonRes = await fetch(`${base}/common-searches`);
+        const commonData = await commonRes.json();
+        
+        if (commonData.commonSearches && commonData.commonSearches.length > 0) {
+          cachedCommonSearches = commonData.commonSearches;
+          const commonContainer = document.getElementById("common-searches");
+          if (commonContainer) {
+            commonContainer.innerHTML = commonData.commonSearches.map(term => 
+              `<button class="tag-btn" onclick="searchFromButton('${term}')">${term}</button>`
+            ).join('');
+          }
+        }
+        
+        // Load trending searches
+        const trendingRes = await fetch(`${base}/trending-searches`);
+        const trendingData = await trendingRes.json();
+        
+        if (trendingData.trendingSearches && trendingData.trendingSearches.length > 0) {
+          const trendingContainer = document.getElementById("trending-searches");
+          if (trendingContainer) {
+            trendingContainer.innerHTML = trendingData.trendingSearches.map(term => 
+              `<button class="tag-btn trending-btn" onclick="searchFromButton('${term}')">${term}</button>`
+            ).join('');
+          }
+        }
+        
+      } catch (e) {
+        console.error("Failed to load search buttons:", e);
+      }
+    }
+
+    // Function to search when a button is clicked
+    function searchFromButton(term) {
+      document.getElementById("search").value = term;
+      doSearch();
+    }
+
+    // Random search functionality
+    function randomSearch() {
+      if (cachedCommonSearches.length === 0) {
+        cachedCommonSearches = ['mature', 'milf', 'teen', 'black', 'asian', 'latina', 'bbw', 'anal', 'lesbian', 'hardcore'];
+      }
+      const randomTerm = cachedCommonSearches[Math.floor(Math.random() * cachedCommonSearches.length)];
+      document.getElementById("search").value = randomTerm;
+      doSearch();
+    }
+
+    // Show categories modal/overlay
+    async function showCategories() {
+      try {
+        const base = "http://localhost:8000";
+        
+        const res = await fetch(`${base}/search-categories`);
+        const data = await res.json();
+        
+        if (data.categories) {
+          // Create modal overlay
+          const modal = document.createElement('div');
+          modal.style.cssText = `
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9); z-index: 1000; display: flex;
+            align-items: center; justify-content: center; padding: 20px;
+          `;
+          
+          const content = document.createElement('div');
+          content.style.cssText = `
+            background: #1c1c1c; border-radius: 12px; padding: 30px;
+            max-width: 90%; max-height: 80%; overflow-y: auto;
+            box-shadow: 0 0 30px rgba(253, 145, 214, 0.3);
+          `;
+          
+          let categoriesHTML = `
+            <h2 style="color: #fd91d6; text-align: center; margin-bottom: 25px;">Search Categories</h2>
+            <button onclick="this.parentElement.parentElement.remove()" 
+                    style="position: absolute; top: 15px; right: 20px; background: none; 
+                           border: none; color: #aaa; font-size: 24px; cursor: pointer;">×</button>
+          `;
+          
+          Object.entries(data.categories).forEach(([category, terms]) => {
+            const categoryName = category.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
+            categoriesHTML += `
+              <div style="margin-bottom: 20px;">
+                <h3 style="color: #fff; margin-bottom: 10px; font-size: 1.1em; 
+                           text-transform: capitalize;">${categoryName}</h3>
+                <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                  ${terms.map(term => 
+                    `<button class="tag-btn" onclick="this.parentElement.parentElement.parentElement.parentElement.remove(); searchFromButton('${term}')" 
+                             style="font-size: 0.85em; padding: 4px 12px;">${term}</button>`
+                  ).join('')}
+                </div>
+              </div>
+            `;
+          });
+          
+          content.innerHTML = categoriesHTML;
+          modal.appendChild(content);
+          document.body.appendChild(modal);
+          
+          // Close on backdrop click
+          modal.addEventListener('click', (e) => {
+            if (e.target === modal) modal.remove();
+          });
+        }
+      } catch (e) {
+        console.error("Failed to load categories:", e);
+        alert("Failed to load categories. Please try again.");
+      }
+    }
+
+    // Recommendations functionality
+    async function fetchRecommendations() {
+      try {
+        const response = await fetch('/recommendations');
+        const recommendations = await response.json();
+        const recommendationsContainer = document.querySelector('#recommendations');
+        if (recommendationsContainer && Array.isArray(recommendations)) {
+          recommendationsContainer.innerHTML = '';
+          recommendations.forEach(term => {
+            const button = document.createElement('button');
+            button.className = 'tag-btn';
+            button.textContent = term;
+            button.onclick = () => searchFromButton(term);
+            recommendationsContainer.appendChild(button);
+          });
+        }
+      } catch (error) {
+        console.error('Error fetching recommendations:', error);
+      }
+    }
+
+    async function submitRating(term, rating) {
+      try {
+        await fetch('/rate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ term, rating })
+        });
+        alert('Rating submitted!');
+      } catch (error) {
+        console.error('Error submitting rating:', error);
+      }
+    }
+
+    // Trending searches functionality
+    async function fetchTrendingSearches() {
+      try {
+        const response = await fetch('/trending-searches');
+        const data = await response.json();
+        const trendingSearches = data.trendingSearches || data;
+        const trendingBar = document.querySelector('#trending-searches');
+        if (trendingBar && Array.isArray(trendingSearches)) {
+          trendingBar.innerHTML = '';
+          trendingSearches.forEach(term => {
+            const button = document.createElement('button');
+            button.className = 'tag-btn trending-btn';
+            button.textContent = term;
+            button.onclick = () => searchFromButton(term);
+            trendingBar.appendChild(button);
+          });
+        }
+      } catch (error) {
+        console.error('Error fetching trending searches:', error);
+      }
+    }
+
+    // Initialize page
+    window.addEventListener('DOMContentLoaded', function() {
+      loadSearchButtons();
+      fetchRecommendations();
+      fetchTrendingSearches();
+      
+      // Add keyboard shortcut for search
+      document.getElementById('search').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+          doSearch();
+        }
+      });
+
+      // Add infinite scroll listener
+      window.addEventListener('scroll', handleInfiniteScroll);
+
+      // Auto-search on page load
+      document.addEventListener('DOMContentLoaded', async () => {
+        try {
+          const randomSearchResponse = await fetch('/random-search');
+          const randomData = await randomSearchResponse.json();
+          const randomTerm = randomData.term;
+          const searchInput = document.querySelector('input[type="text"]');
+          searchInput.value = randomTerm;
+          searchFromButton(randomTerm);
+
+          // Load dynamic trending searches
+          const trendingResponse = await fetch('/trending-searches');
+          const trendingData = await trendingResponse.json();
+          const trendingTerms = trendingData.trendingSearches || trendingData;
+          const trendingBar = document.querySelector('.trending-bar');
+          if (trendingBar && Array.isArray(trendingTerms)) {
+            trendingBar.innerHTML = '';
+            trendingTerms.forEach(term => {
+              const button = document.createElement('button');
+              button.className = 'tag-btn trending-btn';
+              button.textContent = term;
+              button.onclick = () => searchFromButton(term);
+              trendingBar.appendChild(button);
+            });
+          }
+        } catch (error) {
+          console.error('Error initializing page:', error);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
