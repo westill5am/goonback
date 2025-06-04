@@ -1,0 +1,240 @@
+{
+  "timestamp": "2025-06-04T06:53:41.732Z",
+  "summary": {
+    "totalTests": 16,
+    "passed": 8,
+    "failed": 8,
+    "scraperStatus": {
+      "spankbang": {
+        "totalTests": 4,
+        "passed": 4,
+        "failed": 0,
+        "averageResults": 171.5,
+        "preferredMethod": "WebScrapingAPI"
+      },
+      "redtube": {
+        "totalTests": 4,
+        "passed": 4,
+        "failed": 0,
+        "averageResults": 33,
+        "preferredMethod": "WebScrapingAPI"
+      },
+      "xvideos": {
+        "totalTests": 4,
+        "passed": 0,
+        "failed": 4,
+        "averageResults": 0,
+        "preferredMethod": "unknown"
+      },
+      "pornhub": {
+        "totalTests": 4,
+        "passed": 0,
+        "failed": 4,
+        "averageResults": 0,
+        "preferredMethod": "unknown"
+      }
+    }
+  },
+  "detailedResults": [
+    {
+      "scraper": "spankbang",
+      "query": "milf",
+      "timestamp": "2025-06-04T06:53:41.734Z",
+      "status": "success",
+      "resultCount": 163,
+      "method": "WebScrapingAPI",
+      "error": null,
+      "executionTime": 2440,
+      "recommendations": []
+    },
+    {
+      "scraper": "spankbang",
+      "query": "teen",
+      "timestamp": "2025-06-04T06:53:46.182Z",
+      "status": "success",
+      "resultCount": 156,
+      "method": "WebScrapingAPI",
+      "error": null,
+      "executionTime": 1970,
+      "recommendations": []
+    },
+    {
+      "scraper": "spankbang",
+      "query": "blonde",
+      "timestamp": "2025-06-04T06:53:50.164Z",
+      "status": "success",
+      "resultCount": 185,
+      "method": "WebScrapingAPI",
+      "error": null,
+      "executionTime": 2162,
+      "recommendations": []
+    },
+    {
+      "scraper": "spankbang",
+      "query": "anal",
+      "timestamp": "2025-06-04T06:53:54.335Z",
+      "status": "success",
+      "resultCount": 182,
+      "method": "WebScrapingAPI",
+      "error": null,
+      "executionTime": 2076,
+      "recommendations": []
+    },
+    {
+      "scraper": "redtube",
+      "query": "milf",
+      "timestamp": "2025-06-04T06:53:58.412Z",
+      "status": "success",
+      "resultCount": 36,
+      "method": "WebScrapingAPI",
+      "error": null,
+      "executionTime": 1012,
+      "recommendations": []
+    },
+    {
+      "scraper": "redtube",
+      "query": "teen",
+      "timestamp": "2025-06-04T06:54:01.425Z",
+      "status": "success",
+      "resultCount": 33,
+      "method": "WebScrapingAPI",
+      "error": null,
+      "executionTime": 424,
+      "recommendations": []
+    },
+    {
+      "scraper": "redtube",
+      "query": "blonde",
+      "timestamp": "2025-06-04T06:54:03.858Z",
+      "status": "success",
+      "resultCount": 29,
+      "method": "WebScrapingAPI",
+      "error": null,
+      "executionTime": 808,
+      "recommendations": []
+    },
+    {
+      "scraper": "redtube",
+      "query": "anal",
+      "timestamp": "2025-06-04T06:54:06.671Z",
+      "status": "success",
+      "resultCount": 34,
+      "method": "WebScrapingAPI",
+      "error": null,
+      "executionTime": 786,
+      "recommendations": []
+    },
+    {
+      "scraper": "xvideos",
+      "query": "milf",
+      "timestamp": "2025-06-04T06:54:09.464Z",
+      "status": "no_results",
+      "resultCount": 0,
+      "method": "WebScrapingAPI",
+      "error": null,
+      "executionTime": 0,
+      "recommendations": [
+        "Consider updating selectors or URL patterns"
+      ]
+    },
+    {
+      "scraper": "xvideos",
+      "query": "teen",
+      "timestamp": "2025-06-04T06:54:11.466Z",
+      "status": "no_results",
+      "resultCount": 0,
+      "method": "WebScrapingAPI",
+      "error": null,
+      "executionTime": 1,
+      "recommendations": [
+        "Consider updating selectors or URL patterns"
+      ]
+    },
+    {
+      "scraper": "xvideos",
+      "query": "blonde",
+      "timestamp": "2025-06-04T06:54:13.480Z",
+      "status": "no_results",
+      "resultCount": 0,
+      "method": "WebScrapingAPI",
+      "error": null,
+      "executionTime": 0,
+      "recommendations": [
+        "Consider updating selectors or URL patterns"
+      ]
+    },
+    {
+      "scraper": "xvideos",
+      "query": "anal",
+      "timestamp": "2025-06-04T06:54:15.492Z",
+      "status": "no_results",
+      "resultCount": 0,
+      "method": "WebScrapingAPI",
+      "error": null,
+      "executionTime": 0,
+      "recommendations": [
+        "Consider updating selectors or URL patterns"
+      ]
+    },
+    {
+      "scraper": "pornhub",
+      "query": "milf",
+      "timestamp": "2025-06-04T06:54:17.494Z",
+      "status": "no_results",
+      "resultCount": 0,
+      "method": "WebScrapingAPI",
+      "error": null,
+      "executionTime": 1,
+      "recommendations": [
+        "Consider updating selectors or URL patterns"
+      ]
+    },
+    {
+      "scraper": "pornhub",
+      "query": "teen",
+      "timestamp": "2025-06-04T06:54:19.502Z",
+      "status": "no_results",
+      "resultCount": 0,
+      "method": "WebScrapingAPI",
+      "error": null,
+      "executionTime": 0,
+      "recommendations": [
+        "Consider updating selectors or URL patterns"
+      ]
+    },
+    {
+      "scraper": "pornhub",
+      "query": "blonde",
+      "timestamp": "2025-06-04T06:54:21.508Z",
+      "status": "no_results",
+      "resultCount": 0,
+      "method": "WebScrapingAPI",
+      "error": null,
+      "executionTime": 1,
+      "recommendations": [
+        "Consider updating selectors or URL patterns"
+      ]
+    },
+    {
+      "scraper": "pornhub",
+      "query": "anal",
+      "timestamp": "2025-06-04T06:54:23.512Z",
+      "status": "no_results",
+      "resultCount": 0,
+      "method": "WebScrapingAPI",
+      "error": null,
+      "executionTime": 0,
+      "recommendations": [
+        "Consider updating selectors or URL patterns"
+      ]
+    }
+  ],
+  "recommendations": [
+    "⚠️  Warning: Success rate below 75%. Some scrapers need attention.",
+    "💰 spankbang: Relies on WebScrapingAPI - Consider optimizing direct scraping",
+    "💰 redtube: Relies on WebScrapingAPI - Consider optimizing direct scraping",
+    "❌ xvideos: Complete failure - Implement WebScrapingAPI fallback",
+    "❌ pornhub: Complete failure - Implement WebScrapingAPI fallback",
+    "💡 Moderate API usage - Some scrapers need direct scraping improvements"
+  ]
+}

@@ -1,0 +1,38 @@
+SCRAPER TEST REPORT
+Generated: 2025-06-04T06:53:41.732Z
+==================================================
+
+SUMMARY:
+Total Tests: 16
+Passed: 8
+Failed: 8
+Success Rate: 50.0%
+
+SCRAPER PERFORMANCE:
+SPANKBANG:
+  Success: 4/4 (100.0%)
+  Avg Results: 171.5
+  Preferred Method: WebScrapingAPI
+
+REDTUBE:
+  Success: 4/4 (100.0%)
+  Avg Results: 33.0
+  Preferred Method: WebScrapingAPI
+
+XVIDEOS:
+  Success: 0/4 (0.0%)
+  Avg Results: 0.0
+  Preferred Method: unknown
+
+PORNHUB:
+  Success: 0/4 (0.0%)
+  Avg Results: 0.0
+  Preferred Method: unknown
+
+RECOMMENDATIONS:
+- ⚠️  Warning: Success rate below 75%. Some scrapers need attention.
+- 💰 spankbang: Relies on WebScrapingAPI - Consider optimizing direct scraping
+- 💰 redtube: Relies on WebScrapingAPI - Consider optimizing direct scraping
+- ❌ xvideos: Complete failure - Implement WebScrapingAPI fallback
+- ❌ pornhub: Complete failure - Implement WebScrapingAPI fallback
+- 💡 Moderate API usage - Some scrapers need direct scraping improvements

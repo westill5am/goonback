@@ -1,0 +1,43 @@
+{
+  "name": "goonerbrain-backend",
+  "version": "2.1.0",
+  "description": "GoonerBrain Backend Server - Optimized for Node.js 16 with 503 error prevention",
+  "main": "index-production.js",
+  "scripts": {
+    "start": "node index-production.js",
+    "dev": "node index-production.js",
+    "test": "node console-error-debugger.js",
+    "emergency": "node index-emergency.js",
+    "debug": "node console-error-debugger.js",
+    "validate": "node working-scrapers.js"
+  },
+  "keywords": [
+    "express",
+    "web-scraping",
+    "search-engine",
+    "arsenal",
+    "football"
+  ],
+  "author": "GoonerBrain Team",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "axios": "^0.27.2",
+    "cheerio": "^1.0.0-rc.12"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  },
+  "engines": {
+    "node": ">=16.0.0 <=18.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/goonerbrain/backend"
+  },
+  "bugs": {
+    "url": "https://github.com/goonerbrain/backend/issues"
+  },
+  "homepage": "https://goonerbrain.com"
+}
