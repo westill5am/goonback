@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GoonerBrain Meta Search</title>
+  <meta name="description" content="Search across top adult sites instantly. GoonerBrain is the ultimate NSFW video search tool." />
+  
+  <script type="text/javascript" data-cfasync="false">
+/*<![CDATA[/* */
+(function(){var s=window,u="f1149e727853f58765f89c1f34875fe5",g=[["siteId",227-600*648+5588808],["minBid",0],["popundersPerIP","0"],["delayBetween",0],["default",false],["defaultPerDay",0],["topmostLayer","auto"]],b=["d3d3LmFudGlhZGJsb2Nrc3lzdGVtcy5jb20vQ1QvdGluZGV4Lm1pbi5qcw==","ZDNjb2Q4MHRobjdxbmQuY2xvdWRmcm9udC5uZXQvTVpFYmgvYXlOSFZnL2Job2xtZXMuY3Nz","d3d3LmZmZ294Y3phdmguY29tL1d1SlRlL29pbmRleC5taW4uanM=","d3d3LnBlanBpb2ltZ2p0eC5jb20vdlQvQ0pDci95aG9sbWVzLmNzcw=="],w=-1,n,v,l=function(){clearTimeout(v);w++;if(b[w]&&!(1774885023000<(new Date).getTime()&&1<w)){n=s.document.createElement("script");n.type="text/javascript";n.async=!0;var c=s.document.getElementsByTagName("script")[0];n.src="https://"+atob(b[w]);n.crossOrigin="anonymous";n.onerror=l;n.onload=function(){clearTimeout(v);s[u.slice(0,16)+u.slice(0,16)]||l()};v=setTimeout(l,5E3);c.parentNode.insertBefore(n,c)}};if(!s[u]){try{Object.freeze(s[u]=g)}catch(e){}l()}})();
+/*]]>/* */
+</script>
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="GoonerBrain Meta Search">
+  <meta property="og:description" content="Search across top adult sites instantly. GoonerBrain is the ultimate NSFW video search tool.">
+  <meta property="og:image" content="https://goonerbrain.com/og-image.jpg">
+  <meta property="og:url" content="https://goonerbrain.com">
+  <meta property="og:type" content="website">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="GoonerBrain Meta Search">
+  <meta name="twitter:description" content="Search across top adult sites instantly.">
+  <meta name="twitter:image" content="https://goonerbrain.com/og-image.jpg">
+
+  <link rel="icon" href="/favicon.ico" />
+
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background: #0d0d0d;
+      color: white;
+      margin: 0;
+      padding: 40px 20px;
+      text-align: center;
+    }
+    input[type="text"] {
+      padding: 10px;
+      font-size: 1.2em;
+      width: 100%;
+      max-width: 500px;
+      border-radius: 8px;
+      border: none;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 40px;
+    }
+    .card {
+      background: #1c1c1c;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(255, 105, 180, 0.2);
+      text-align: left;
+      transition: transform 0.2s ease;
+    }
+    .card:hover {
+      transform: scale(1.02);
+    }
+    video, img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+    h3 {
+      margin: 10px 0 5px;
+      font-size: 1.1em;
+    }
+    .source {
+      font-size: 0.85em;
+      color: #aaa;
+    }
+    @media (max-width: 500px) {
+      body {
+        padding: 20px 10px;
+      }
+      input[type="text"] {
+        font-size: 1em;
+      }
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1 style="color:hotpink;">GoonerBrain Meta Search</h1>
+  <form onsubmit="event.preventDefault(); doSearch();">
+    <input id="search" type="text" placeholder="Search..." autocomplete="off" />
+  </form>
+  <div id="results"></div>
+
+  <p style="margin-top: 20px;">
+<a href="https://ko-fi.com/goonerbrain" target="_blank" style="color:hotpink;">💖 Support This Project</a>
+  </p>
+
+  <script>
+    async function doSearch() {
+      const input = document.getElementById("search");
+      const q = input.value.trim();
+      const out = document.getElementById("results");
+      if (!q) return;
+
+      out.innerHTML = `<p>Searching for <b>${q}</b>...</p>`;
+      try {
+        // FIX: Use backend API on port 8001 for local development
+        const backend = location.hostname.includes("goonerbrain")
+          ? "https://goonerbrain.com"
+          : "http://localhost:8001";
+
+        const res = await fetch(`${backend}/search?query=${encodeURIComponent(q)}`);
+        const data = await res.json();
+        console.log("📦 RAW RESPONSE:", data);
+
+        const results = data.results || [];
+        if (!results.length) {
+          out.innerHTML = `<p>No results found.</p>`;
+          return;
+        }
+
+        out.innerHTML = `<div class="grid">` + results.map(v => {
+          const preview = v.preview && v.preview.trim() !== ""
+            ? v.preview
+            : `https://via.placeholder.com/300x160?text=${encodeURIComponent(v.source + " " + q)}`;
+          const isVideo = /\.(mp4|webm)$/i.test(preview);
+          return `
+            <div class="card">
+              <a href="${v.url}" target="_blank">
+                ${isVideo
+                  ? `<video src="${preview}" muted loop preload="none"
+                      onmouseover="this.play()" 
+                      onmouseout="this.pause(); this.currentTime = 0;">
+                      <source src="${preview}" type="video/mp4" />
+                   </video>`
+                  : `<img src="${preview}" alt="${v.title}" />`
+                }
+              </a>
+              <h3>${v.title}</h3>
+              <div class="source">📺 ${v.source}</div>
+            </div>
+          `;
+        }).join('') + `</div>`;
+      } catch (e) {
+        console.error("❌ Fetch error:", e);
+        out.innerHTML = `<p style="color:red;">Error: ${e.message}</p>`;
+      }
+    }
+  </script>
+</body>
+</html>
